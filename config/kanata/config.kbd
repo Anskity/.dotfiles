@@ -1,0 +1,10 @@
+(defsrc 
+    caps
+)
+
+(defalias
+    superbs  (tap-hold 100 100 S-grv lmet)
+)
+(deflayer base
+    @superbs
+)
