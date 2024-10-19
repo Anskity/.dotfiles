@@ -87,9 +87,6 @@
     programs.bash.shellAliases = {
         vim = "nvim";
     };
-    programs.bash.bashrcExtra = ''
-        hyprctl setcursor rose-pine-hyprcursor 42
-    '';
 
     #neovim
     programs.neovim.enable = true;
@@ -128,6 +125,11 @@
             };
         };
     };
+
+    #tmux
+    #programs.tmux = {
+    #    enable = true;
+    #};
 
     #Dotfiles
     home.file = {
