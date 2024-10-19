@@ -87,6 +87,9 @@
     programs.bash.shellAliases = {
         vim = "nvim";
     };
+    programs.bash.bashrcExtra = ''
+        hyprctl setcursor rose-pine-hyprcursor 42
+    '';
 
     #neovim
     programs.neovim.enable = true;
@@ -130,5 +133,6 @@
     home.file = {
         ".config/nvim".source = config.lib.file.mkOutOfStoreSymlink /home/victor/.dotfiles/config/nvim;
         ".config/waybar".source = config.lib.file.mkOutOfStoreSymlink /home/victor/.dotfiles/config/waybar;
+        ".icons/".source = config.lib.file.mkOutOfStoreSymlink /home/victor/.dotfiles/config/icons;
     };
 }
