@@ -10,6 +10,7 @@
       ./hardware-configuration.nix
       ./hyprland.nix
       ./lsp.nix
+      ./gamedev.nix
     ];
 
   # Bootloader.
@@ -146,7 +147,7 @@
      gcc
      kanata
      nix-init
-     minecraft
+     #minecraft
   ];
   programs.steam.enable = true;
 
