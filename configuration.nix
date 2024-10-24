@@ -17,7 +17,7 @@
   boot.loader.efi.canTouchEfiVariables = true;
 
   networking.hostName = "nixos"; # Define your hostname.
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
+  #networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
@@ -48,14 +48,38 @@
 
   #Enable display manager
   services.xserver.enable = true;
-  services.xserver.displayManager.sddm.enable = true;
-  services.xserver.displayManager.sddm.wayland.enable = true;
+  services.displayManager.sddm.enable = true;
+  services.displayManager.sddm.wayland.enable = true;
 
   # Enable KDE Plasma
-  # services.xserver.windowManager.plasma5.enable = true;
+  services.desktopManager.plasma6.enable = true;
 
   # Kanata
-  services.kanata.enable = true;
+    services.kanata = {
+        enable = true;
+        keyboards = {
+            main = {
+                devices = [ 
+                    "pci-0000:00:14.0-usb-0:5:1.0-event-kbd"
+                    "pci-0000:00:14.0-usb-0:6:1.1-event-kbd"
+                    "pci-0000:00:14.0-usbv2-0:5:1.0-event-kbd"
+                    "pci-0000:00:14.0-usbv2-0:6:1.1-event-kbd"
+                ];
+                config = ''
+                    (defsrc 
+                        caps
+                    )
+
+                    (defalias
+                        met  (tap-hold 100 100 lmet lmet)
+                    )
+                    (deflayer base
+                        @met
+                    )
+                '';
+            };
+        };
+    };
 
   # Configure keymap in X11
   services.xserver.xkb = {
@@ -96,7 +120,7 @@
     extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [
       kate
-      nil
+    #  nil
     #  thunderbird
     ];
   };
@@ -115,12 +139,14 @@
   #  wget
      wget
      kitty
-     nerdfonts
+     #nerdfonts
      git
-     obs-studio
-     discord
+     #obs-studio
+     #discord
      gcc
      kanata
+     nix-init
+     minecraft
   ];
   programs.steam.enable = true;
 

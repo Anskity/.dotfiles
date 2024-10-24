@@ -13,6 +13,7 @@
     shotman
     hyprshot
     hyprcursor
+    hyprpaper
     wl-clipboard
     inputs.rose-pine-hyprcursor.packages.${pkgs.system}.default
   ];
