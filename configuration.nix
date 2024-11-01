@@ -12,6 +12,7 @@
       ./sway.nix
       ./lsp.nix
       ./gamedev.nix
+      ./stupid_stuff.nix
     ];
 
   # Bootloader.
@@ -164,7 +165,6 @@
      xorg.libX11
      xorg.libXft
      xorg.libXinerama
-     neofetch
   ];
   programs.steam.enable = true;
 
