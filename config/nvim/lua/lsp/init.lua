@@ -1,6 +1,31 @@
-local lsp_list = {
-    require("lsp.lua"),
-}
+local cmp = require("cmp")
+cmp.setup({
+    snippet = {
+        expand = function(args)
+            vim.snippet.expand(args.body) -- For native neovim snippets (Neovim v0.10+)
+        end,
+    },
+    window = {
+        completion = cmp.config.window.bordered(),
+        documentation = cmp.config.window.bordered(),
+    },
+    mapping = cmp.mapping.preset.insert({
+        ['<C-b>'] = cmp.mapping.scroll_docs(-4),
+        ['<C-f>'] = cmp.mapping.scroll_docs(4),
+        ['<C-Space>'] = cmp.mapping.complete(),
+        ['<C-e>'] = cmp.mapping.abort(),
+        ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+    }),
+    sources = cmp.config.sources({
+        { name = 'nvim_lsp' },
+        -- { name = 'vsnip' }, -- For vsnip users.
+        -- { name = 'luasnip' }, -- For luasnip users.
+        -- { name = 'ultisnips' }, -- For ultisnips users.
+        -- { name = 'snippy' }, -- For snippy users.
+    }, {
+        { name = 'buffer' },
+    })
+})
 
 local on_attach = function()
     local opts = {}
@@ -16,21 +41,13 @@ local on_attach = function()
     vim.keymap.set('n', '<F4>', '<cmd>lua vim.lsp.buf.code_action()<cr>', opts)
 end
 
-for _, lsp in pairs(lsp_list) do
-    vim.api.nvim_create_autocmd("FileType", {
-        pattern = lsp.pattern,
-        callback = function()
-            local client = vim.lsp.start_client({
-                name = lsp.name,
-                cmd = lsp.cmd,
-                root_dir = lsp.get_root_dir(),
-                on_attach = on_attach,
-            })
+local capabilities = require('cmp_nvim_lsp').default_capabilities()
+local opts = {
+    on_attach = on_attach,
+    capabilities = capabilities,
+}
 
-            if not client then
-                vim.notify("Lsp client couldn't be created")
-            end
-            vim.lsp.buf_attach_client(0, client)
-        end,
-    })
-end
+require("lsp.lua")(opts)
+require("lsp.go")(opts)
+require("lsp.nix")(opts)
+

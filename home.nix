@@ -73,6 +73,7 @@
     #
     home.sessionVariables = {
         EDITOR = "nvim";
+        TERMINAL = "kitty";
     };
 
     # Let Home Manager install and manage itself.
@@ -86,15 +87,20 @@
     programs.bash.enable = true;
     programs.bash.shellAliases = {
         vim = "nvim";
+        ":q" = "exit";
     };
 
     #neovim
     programs.neovim.enable = true;
 
+    #Go
+    programs.go.enable = true;
+
     #Git
     programs.git.enable = true;
     programs.git.userName = "xijniN";
     programs.git.userEmail = "xijnin@gmail.com";
+    programs.git.extraConfig.init.defaultBranch = "master";
 
     #qutebrowser
     programs.qutebrowser = {
@@ -127,15 +133,25 @@
     };
 
     #tmux
-    #programs.tmux = {
-    #    enable = true;
-    #};
+    programs.tmux = {
+        enable = true;
+    };
+
+    programs.feh = {
+        enable = true;
+    };
+
+    programs.obs-studio.enable = true;
+
+    services.picom.enable = true;
 
     #Dotfiles
     home.file = {
         ".config/nvim".source = config.lib.file.mkOutOfStoreSymlink /home/victor/.dotfiles/config/nvim;
         ".config/waybar".source = config.lib.file.mkOutOfStoreSymlink /home/victor/.dotfiles/config/waybar;
         ".config/hypr".source = config.lib.file.mkOutOfStoreSymlink /home/victor/.dotfiles/config/hypr;
+        ".config/i3".source = config.lib.file.mkOutOfStoreSymlink /home/victor/.dotfiles/config/i3;
+        ".config/kitty".source = config.lib.file.mkOutOfStoreSymlink /home/victor/.dotfiles/config/kitty;
         ".icons/".source = config.lib.file.mkOutOfStoreSymlink /home/victor/.dotfiles/config/icons;
     };
 }

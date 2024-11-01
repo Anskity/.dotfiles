@@ -22,6 +22,9 @@
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
+  virtualisation.virtualbox.host.enable = true;
+  users.extraGroups.vboxusers.members = [ "victor" ];
+
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
@@ -52,35 +55,48 @@
   services.displayManager.sddm.enable = true;
   services.displayManager.sddm.wayland.enable = true;
 
+  services.xserver.windowManager.i3 = {
+      enable = true;
+      extraPackages = with pkgs; [
+          dmenu #application launcher most people use
+              i3status # gives you the default i3 status bar
+              i3lock #default i3 screen locker
+              i3blocks #if you are planning on using i3blocks over i3status
+      ];
+  };
+
   # Enable KDE Plasma
   services.desktopManager.plasma6.enable = true;
 
   # Kanata
-    services.kanata = {
-        enable = true;
-        keyboards = {
-            main = {
-                devices = [ 
-                    "pci-0000:00:14.0-usb-0:5:1.0-event-kbd"
-                    "pci-0000:00:14.0-usb-0:6:1.1-event-kbd"
-                    "pci-0000:00:14.0-usbv2-0:5:1.0-event-kbd"
-                    "pci-0000:00:14.0-usbv2-0:6:1.1-event-kbd"
-                ];
-                config = ''
-                    (defsrc 
-                        caps
-                    )
+  services.kanata = {
+      enable = true;
+      keyboards = {
+          main = {
+              devices = [ 
+                  "/dev/input/by-path/pci-0000:00:14.0-usb-0:5:1.0-event-kbd"
+                  "/dev/input/by-path/pci-0000:00:14.0-usb-0:6:1.1-event-kbd"
+                  "/dev/input/by-path/pci-0000:00:14.0-usbv2-0:5:1.0-event-kbd"
+                  "/dev/input/by-path/pci-0000:00:14.0-usbv2-0:6:1.1-event-kbd"
+                  "usb-SEMICO_USB_Keyboard-event-kbd"
+                  "usb-SEMICO_USB_Keyboard-event-if01"
+              ];
+              extraDefCfg = "process-unmapped-keys yes";
+              config = ''
+                  (defsrc 
+                   caps
+                  )
 
-                    (defalias
-                        met  (tap-hold 100 100 lmet lmet)
-                    )
-                    (deflayer base
-                        @met
-                    )
-                '';
-            };
-        };
-    };
+                  (defalias
+                   met  (tap-hold 100 100 lmet lmet)
+                  )
+                  (deflayer base
+                   @met
+                  )
+                  '';
+          };
+      };
+  };
 
   # Configure keymap in X11
   services.xserver.xkb = {
@@ -90,6 +106,7 @@
 
   # Configure console keymap
   console.keyMap = "br-abnt2";
+
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
@@ -119,11 +136,7 @@
     description = "Victor";
     password = "flor";
     extraGroups = [ "networkmanager" "wheel" ];
-    packages = with pkgs; [
-      kate
-    #  nil
-    #  thunderbird
-    ];
+    packages = [];
   };
 
 
@@ -145,9 +158,16 @@
      #obs-studio
      #discord
      gcc
+     pkg-config
+     gnumake
      kanata
+     vesktop
      nix-init
      #minecraft
+     xorg.libX11.dev
+     xorg.libX11
+     xorg.libXft
+     xorg.libXinerama
   ];
   programs.steam.enable = true;
 
