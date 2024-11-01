@@ -9,6 +9,7 @@
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
       ./hyprland.nix
+      ./sway.nix
       ./lsp.nix
       ./gamedev.nix
     ];

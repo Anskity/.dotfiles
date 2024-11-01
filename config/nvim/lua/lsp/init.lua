@@ -2,7 +2,7 @@ local cmp = require("cmp")
 cmp.setup({
     snippet = {
         expand = function(args)
-            vim.snippet.expand(args.body) -- For native neovim snippets (Neovim v0.10+)
+            require('snippy').expand_snippet(args.body)
         end,
     },
     window = {
@@ -18,10 +18,7 @@ cmp.setup({
     }),
     sources = cmp.config.sources({
         { name = 'nvim_lsp' },
-        -- { name = 'vsnip' }, -- For vsnip users.
-        -- { name = 'luasnip' }, -- For luasnip users.
-        -- { name = 'ultisnips' }, -- For ultisnips users.
-        -- { name = 'snippy' }, -- For snippy users.
+        { name = 'snippy' }, -- For snippy users.
     }, {
         { name = 'buffer' },
     })
