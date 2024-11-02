@@ -47,4 +47,5 @@ local opts = {
 require("lsp.lua")(opts)
 require("lsp.go")(opts)
 require("lsp.nix")(opts)
+require("lsp.rust")(opts)
 

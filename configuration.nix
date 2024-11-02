@@ -13,6 +13,7 @@
       ./lsp.nix
       ./gamedev.nix
       ./stupid_stuff.nix
+      ./rust.nix
     ];
 
   # Bootloader.
@@ -26,6 +27,10 @@
 
   virtualisation.virtualbox.host.enable = true;
   users.extraGroups.vboxusers.members = [ "victor" ];
+
+  hardware.bluetooth.enable = true; # enables support for Bluetooth
+  hardware.bluetooth.powerOnBoot = true; # powers up the default Bluetooth controller on boot
+  services.blueman.enable = true;
 
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
@@ -121,6 +126,9 @@
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
+    wireplumber = {
+        enable = true;
+    };
     # If you want to use JACK applications, uncomment this
     #jack.enable = true;
 
@@ -137,7 +145,7 @@
     isNormalUser = true;
     description = "Victor";
     password = "flor";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "audio" ];
     packages = [];
   };
 
@@ -165,6 +173,14 @@
      xorg.libX11
      xorg.libXft
      xorg.libXinerama
+
+     mpv
+     youtube-tui
+     youtube-music
+     blueman
+     bluez
+     bluez-alsa
+     bluez-tools
   ];
   programs.steam.enable = true;
 

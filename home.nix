@@ -56,10 +56,18 @@
         enable = true;
         settings = {
             content.javascript.clipboard = "access";
+            #colors.webpage.darkmode.enabled = true;
+        };
+        searchEngines = {
+            gg = "https://www.google.com/search?q={}";
+            yt = "https://www.youtube.com/results?search_query={}";
         };
         keyBindings = {
             normal = {
                 "<ctrl-o>" = "close";
+                "xs" = "config-cycle statusbar.show always never";
+                "xt" = "config-cycle tabs.show always never";
+                "xx" = "config-cycle tabs.show always never;; config-cycle statusbar.show always never";
             };
             insert = {
                 "<ctrl-c>" = "mode-leave";
@@ -93,6 +101,14 @@
     programs.obs-studio.enable = true;
 
     services.picom.enable = true;
+
+    programs.cava.enable = true;
+    programs.cava.settings = {
+        color = {
+            background = "'#000000'";
+            foreground = "'#fabd2f'";
+        };
+    };
 
     #Dotfiles
     home.file = {
