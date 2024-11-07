@@ -2,8 +2,11 @@
 
 {
     imports = [
-        ./tmux-homemanager.nix
-        ./qutebrowser-homemanager.nix
+        ./tmux.nix
+        ./qutebrowser.nix
+        ./stupid_stuff.nix
+        ./lsp.nix
+        ./zsh.nix
     ];
 
     # Home Manager needs a bit of information about you and the paths it should
@@ -15,8 +18,20 @@
 
     home.packages = [
         pkgs.fzf
+        pkgs.yazi
         pkgs.unzip
+        pkgs.alacritty
+        pkgs.wget
+        pkgs.kitty
 
+        pkgs.vesktop
+        pkgs.mpv
+        pkgs.youtube-tui
+        pkgs.youtube-music
+        pkgs.blueman
+        pkgs.bluez
+        pkgs.bluez-alsa
+        pkgs.bluez-tools
         ];
 
     wayland.windowManager.sway.enable = true;
@@ -25,15 +40,12 @@
     home.sessionVariables = {
         EDITOR = "nvim";
         TERMINAL = "kitty";
+        BROWSER = "${pkgs.qutebrowser}/bin/qutebrowser";
     };
 
     # Let Home Manager install and manage itself.
     programs.home-manager.enable = true;
 
-    programs.zsh.enable = true;
-    programs.zsh.shellAliases = {
-        vim = "nvim";
-    };
 
     programs.bash.enable = true;
     programs.bash.shellAliases = {
@@ -78,6 +90,7 @@
         ".config/i3".source = config.lib.file.mkOutOfStoreSymlink /home/victor/.dotfiles/config/i3;
         ".config/kitty".source = config.lib.file.mkOutOfStoreSymlink /home/victor/.dotfiles/config/kitty;
         ".config/wofi".source = config.lib.file.mkOutOfStoreSymlink /home/victor/.dotfiles/config/wofi;
+        ".config/rofi".source = config.lib.file.mkOutOfStoreSymlink /home/victor/.dotfiles/config/rofi;
         ".icons/".source = config.lib.file.mkOutOfStoreSymlink /home/victor/.dotfiles/config/icons;
     };
 }

@@ -1,4 +1,4 @@
-{ pkgs, config, inputs, ... }:
+{ pkgs, inputs, ... }:
 {
   programs.hyprland = {
     enable = true;
@@ -15,6 +15,6 @@
     pkgs.hyprcursor
     pkgs.hyprpaper
     pkgs.wl-clipboard
-    inputs.rose-pine-hyprcursor.packages.${pkgs.system}.default
+    pkgs.swaynotificationcenter
   ];
 }

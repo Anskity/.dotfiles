@@ -1,6 +1,6 @@
 { pkgs, config, inputs, ... }:
 {
-    environment.systemPackages = [
+    home.packages = [
         pkgs.cava
             pkgs.cowsay
             pkgs.fortune

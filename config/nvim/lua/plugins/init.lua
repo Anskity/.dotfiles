@@ -5,4 +5,5 @@ return {
     require("plugins.lspconfig"),
     require("plugins.treesitter"),
     require("plugins.cmp"),
+    require("plugins.mini"),
 }

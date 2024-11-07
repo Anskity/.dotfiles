@@ -9,10 +9,10 @@
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
       ./hyprland.nix
+      ./i3.nix
+      ./hyprwm.nix
       ./sway.nix
-      ./lsp.nix
       ./gamedev.nix
-      ./stupid_stuff.nix
       ./rust.nix
     ];
 
@@ -62,15 +62,6 @@
   services.displayManager.sddm.enable = true;
   services.displayManager.sddm.wayland.enable = true;
 
-  services.xserver.windowManager.i3 = {
-      enable = true;
-      extraPackages = with pkgs; [
-          dmenu #application launcher most people use
-              i3status # gives you the default i3 status bar
-              i3lock #default i3 screen locker
-              i3blocks #if you are planning on using i3blocks over i3status
-      ];
-  };
 
   # Enable KDE Plasma
   services.desktopManager.plasma6.enable = true;
@@ -145,6 +136,7 @@
     isNormalUser = true;
     description = "Victor";
     password = "flor";
+    shell = pkgs.zsh;
     extraGroups = [ "networkmanager" "wheel" "audio" ];
     packages = [];
   };
@@ -158,31 +150,23 @@
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-  environment.systemPackages = with pkgs; [
-     wget
-     kitty
-     nerdfonts
-     git
-     gcc
-     pkg-config
-     gnumake
-     kanata
-     vesktop
-     nix-init
-     xorg.libX11.dev
-     xorg.libX11
-     xorg.libXft
-     xorg.libXinerama
-
-     mpv
-     youtube-tui
-     youtube-music
-     blueman
-     bluez
-     bluez-alsa
-     bluez-tools
+  environment.systemPackages = [
+     pkgs.nerdfonts
+     pkgs.git
+     pkgs.gcc
+     pkgs.pkg-config
+     pkgs.gnumake
+     pkgs.kanata
   ];
   programs.steam.enable = true;
+  programs.zsh.enable = true;
+  xdg.mime.defaultApplications = {
+      "text/html" = "org.qutebrowser.qutebrowser.desktop";
+      "x-scheme-handler/http" = "org.qutebrowser.qutebrowser.desktop";
+      "x-scheme-handler/https" = "org.qutebrowser.qutebrowser.desktop";
+      "x-scheme-handler/about" = "org.qutebrowser.qutebrowser.desktop";
+      "x-scheme-handler/unknown" = "org.qutebrowser.qutebrowser.desktop";
+  };
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.

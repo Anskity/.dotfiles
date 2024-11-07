@@ -11,6 +11,5 @@ return {
                 "json",
             }
         })
-        print("AI")
     end,
 }
