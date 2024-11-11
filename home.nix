@@ -6,7 +6,9 @@
         ./qutebrowser.nix
         ./stupid_stuff.nix
         ./lsp.nix
+        ./webdev.nix
         ./zsh.nix
+        ./c.nix
     ];
 
     # Home Manager needs a bit of information about you and the paths it should
@@ -16,6 +18,8 @@
 
     home.stateVersion = "24.05"; # Please read the comment before changing.
 
+    nixpkgs.config.allowUnfree = true;
+
     home.packages = [
         pkgs.fzf
         pkgs.yazi
@@ -24,6 +28,7 @@
         pkgs.wget
         pkgs.kitty
 
+        pkgs.discord
         pkgs.vesktop
         pkgs.mpv
         pkgs.youtube-tui
@@ -32,6 +37,12 @@
         pkgs.bluez
         pkgs.bluez-alsa
         pkgs.bluez-tools
+        pkgs.ffmpeg
+
+        pkgs.python3
+
+        pkgs.emacsPackages.doom
+        pkgs.emacs
         ];
 
     wayland.windowManager.sway.enable = true;

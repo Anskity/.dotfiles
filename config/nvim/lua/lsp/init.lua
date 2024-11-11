@@ -38,8 +38,6 @@ local on_attach = function()
     vim.keymap.set('n', '<F4>', '<cmd>lua vim.lsp.buf.code_action()<cr>', opts)
 end
 
-vim.api.nvim_create_autocmd("BufWritePre", { command = "lua vim.lsp.buf.format()" })
-
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 local opts = {
     on_attach = on_attach,
@@ -50,3 +48,5 @@ require("lsp.lua")(opts)
 require("lsp.go")(opts)
 require("lsp.nix")(opts)
 require("lsp.rust")(opts)
+require("lsp.typescript")(opts)
+require("lsp.c")(opts)

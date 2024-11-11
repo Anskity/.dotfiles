@@ -4,5 +4,6 @@
     lua-language-server
     gopls
     nixd
+    nodePackages.typescript-language-server
   ];
 }

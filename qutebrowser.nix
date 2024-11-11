@@ -5,6 +5,7 @@
         enable = true;
         settings = {
             content.javascript.clipboard = "access";
+            content.site_specific_quirks.enabled = true;
             #colors.webpage.darkmode.enabled = true;
         };
         searchEngines = {
@@ -22,8 +23,8 @@
                 "<ctrl-c>" = "mode-leave";
             };
             prompt = {
-                "<ctrl-n>" = "completion-item-focus next";
-                "<ctrl-p>" = "completion-item-focus prev";
+                "<ctrl-n>" = "fake-key <Down>";
+                "<ctrl-p>" = "fake-key <Up>";
                 "<ctrl-c>" = "mode-enter normal";
             };
             passthrough = {

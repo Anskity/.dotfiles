@@ -9,6 +9,7 @@ return {
                 "go",
                 "nix",
                 "json",
+                "c",
             }
         })
     end,
