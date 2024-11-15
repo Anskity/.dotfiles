@@ -23,4 +23,10 @@
         "la" = "ls -a";
         "ll" = "ls -l";
     };
+
+    programs.zsh.initExtra = ''
+        if [ -z $TMUX ]; then
+            tmux 
+        fi
+    '';
 }

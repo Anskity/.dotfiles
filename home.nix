@@ -27,6 +27,8 @@
         pkgs.alacritty
         pkgs.wget
         pkgs.kitty
+        pkgs.tree
+        pkgs.ripgrep
 
         pkgs.discord
         pkgs.vesktop
@@ -102,6 +104,8 @@
         ".config/kitty".source = config.lib.file.mkOutOfStoreSymlink /home/victor/.dotfiles/config/kitty;
         ".config/wofi".source = config.lib.file.mkOutOfStoreSymlink /home/victor/.dotfiles/config/wofi;
         ".config/rofi".source = config.lib.file.mkOutOfStoreSymlink /home/victor/.dotfiles/config/rofi;
+        ".config/vesktop/themes".source = config.lib.file.mkOutOfStoreSymlink /home/victor/.dotfiles/config/vesktop/themes;
+        ".config/vesktop/settings".source = config.lib.file.mkOutOfStoreSymlink /home/victor/.dotfiles/config/vesktop/settings;
         ".icons/".source = config.lib.file.mkOutOfStoreSymlink /home/victor/.dotfiles/config/icons;
     };
 }
